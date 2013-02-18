@@ -1,0 +1,194 @@
+<html>
+    <head>
+        <title>Freburist</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="css/mobile.css" type="text/css">
+        <!--Apache Cordova-->
+        <script type="text/javascript" charset="utf-8" src="cordova-2.3.0.js"></script>
+        <!--jquery mobile-->
+        <link rel="stylesheet" href="css/jquery.mobile-1.2.0.css" />
+        <script src="js/jquery.js"></script>
+        <script src="js/jquery.mobile-1.2.0.js"></script>
+        <!--Google Map-->
+        <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=true&libraries=places"></script>
+        <!--Freburist-->
+
+        <script>
+            var map;
+            var geocoder;
+            var markerMap;
+            document.addEventListener("deviceready", onReady, false);
+            function onReady(){
+                alert("DeviceReady!");
+                navigator.geolocation.getCurrentPosition(curMap,onError);
+            }
+            function onError(error) {
+                alert('code: '    + error.code    + '\n' +
+                    'message: ' + error.message + '\n');
+            }
+            function curMap(position){
+                alert("curMap,"+position.coords.latitude+","+position.coords.longitude);
+                var latlng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+                var mapOptions = {
+                    zoom: 14,
+                    center: latlng,
+                    mapTypeId: google.maps.MapTypeId.ROADMAP
+                };
+                map = new google.maps.Map(document.getElementById('curMap'), mapOptions);
+               
+                
+                addGeo(position);//Add value in inputtext<lat and lng>
+                addrLookup(position.coords.latitude,position.coords.longitude); //Request Geocode form Google Maps.
+            }
+            
+            function addrLookup(lat,lng){
+                alert("addrLookup,"+lat+","+lng);
+                var icon = 'images/icon/marker48.png';
+                var latlng = new google.maps.LatLng(parseFloat(lat),parseFloat(lng));
+                geocoder = new google.maps.Geocoder();
+                geocoder.geocode({'latLng': latlng}, function(results, status) {
+                    if (status == google.maps.GeocoderStatus.OK) {
+                        if (results[1]) {
+                            map.setZoom(14);
+                            marker = new google.maps.Marker({
+                                position: latlng,
+                                map: map,
+                                animation: google.maps.Animation.DROP,
+                                icon: icon
+                            });
+                            document.getElementById('addr').value = results[1].formatted_address;
+                        }
+                    } else {
+                        alert("Geocoder failed due to: " + status);
+                    }
+                });
+            }
+            function addGeo(position){
+                document.getElementById('lat').value = position.coords.latitude;
+                document.getElementById('lng').value = position.coords.longitude;
+            }
+            
+            function selectCate(){
+                setTimeout("selectCate();",10);
+                var radios = document.getElementsByName('cate');
+                var cate;
+                for (var i = 0, length = radios.length; i < length; i++) {
+                    if (radios[i].checked) {
+                        cate = (radios[i].value);
+                    }
+                }
+                document.getElementById("test").value = cate;
+            }
+
+            function selectFor(){
+                setTimeout("selectFor();",10);
+                var select = document.getElementById('fitfor');
+                var fit = select.value;
+                document.getElementById("test2").value = fit;
+            }
+
+            function selectPark(){
+                setTimeout("selectPark();",10);
+                var select = document.getElementById('park');
+                var park = select.value;
+                document.getElementById("test3").value = park;
+            }
+            
+        </script>
+    </head>
+    <body>
+
+        <div data-role="page" id="checkin" data-title="Freburist">
+            <form>
+                <div data-role="header">
+                    <a href="#" data-icon="arrow-l" data-rel="back">Back</a>
+                    <h1>Add venue <br>(behind the scene version)</h1>
+                </div>
+                <div data-role="content">
+                    
+                    <h4>ชื่อสถานที่</h4>
+                    <input type="text" id="venue_name">
+                    <h4>ที่อยู่</h4>
+                    <input id="addr">
+                    <h4>เบอร์โทรศัพท์</h4>
+                    <input type="tel" id="tel">
+                    
+                    <input type="text" id="subdistrict" disabled>
+                    <input type="text" id="district" disabled>
+                    <input type="text" id="province" disabled>
+                    <input type="text" id="postcode" disabled>
+                    <input type="text" id="country" disabled>
+
+
+                    <h4>ประเภทสถานที่</h4>
+                    <input type="radio" name="cate" id="radio-choice-21" value="shops" data-theme="e">
+                    <label for="radio-choice-21">ที่ช๊อป</label>
+
+                    <input type="radio" name="cate" id="radio-choice-22" value="foods" data-theme="e">
+                    <label for="radio-choice-22">ที่กิน</label>
+
+                    <input type="radio" name="cate" id="radio-choice-23" value="travel" data-theme="e">
+                    <label for="radio-choice-23">ที่เที่ยว</label>
+                    
+                    <div id="curMap"><img src="css/images/ajax-loader.gif"></div>
+                    <input id="lat" disabled>
+                    <input id="lng" disabled>
+
+
+
+                    <!--<div data-role="fieldcontain" onclick="selectFor()">
+                        <label for="fitfor">เหมาะกับ :</label>
+                        <select id="fitfor" name="type" data-native-menu="false" >
+                            <option value="categories" selected="selected" disabled="disabled">เลือก</option>
+                            <optgroup label="ที่กิน">
+                                <option value="islam">อิสลาม</option>
+                                <option value="diet">ลดน้ำหนัก</option>
+                                <option value="healthy">อาหารเพื่อสุขภาพ</option>
+                                <option value="family">ครอบครัว</option>
+                            </optgroup>
+                            <optgroup label="ที่ช๊อป">
+                                <option value="secondhands">สินค้ามือสอง</option>
+                                <option value="hitech">สินค้าไฮเทค</option>
+                                <option value="jewelry">เครื่องประดับ</option>
+                                <option value="costumes">เครื่องแต่งกาย</option>
+                                <option value="pets">สัตว์เลี้ยง</option>
+                                <option value="books">หนังสือ</option>
+                                <option value="beauty">ความสวยความงาม</option>
+                                <option value="garden">ต้นไม้และอุปกรณ์ทำสวน</option>
+                                <option value="house">ของใช้ในบ้าน</option>
+                                <option value="souvenirs">ของฝาก/ของที่ระลึก</option>
+                            </optgroup>
+                            <optgroup label="ที่กิน">
+                                <option value="nightlife">เที่ยวกลางคืน</option>
+                                <option value="nature">ธรรมชาติ</option>
+                                <option value="adventure">ผจญภัย</option>
+                                <option value="sports">กีฬา</option>
+                                <option value="cycling">ปั่นจักรยาน</option>
+                                <option value="entertain">บันเทิง</option>
+                            </optgroup>
+                        </select>
+                    </div>
+                    <div data-role="fieldcontain" onclick="selectPark()">
+                        <label for="park">ที่จอดรถ</label>
+                        <select id="park" name="type" data-native-menu="false">
+                            <option value="categories" selected="selected" disabled="disabled">Select categories</option>
+                            <option value="no">ไม่มี</option>  
+                            <option value="sideway">จอดข้างทาง</option>
+                            <option value="parking">ที่จอดรถทางร้าน</option>  
+                        </select>
+                    </div>-->
+                    <!--<label>ค่าประเภท</label>
+                    <input type="text" id="test" disabled="disabled" data-mini="true">
+                    <label>ค่าเหมาะกับ</label>
+                    <input type="text" id="test2" disabled="disabled" data-mini="true">
+                    <label>ค่าที่จอดรถ</label>
+                    <input type="text" id="test3" disabled="disabled" data-mini="true">-->
+                    <input id="submit" type="submit" data-theme="a" value="Submit">
+
+                </div>
+            </form>
+        </div>
+
+    </body>
+</html>

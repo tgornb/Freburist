@@ -1,0 +1,50 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>Freburist</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="css/mobile.css" type="text/css">
+        <!--Apache Cordova-->
+        <script type="text/javascript" charset="utf-8" src="js/cordova-2.3.0.js"></script>
+        <!--jquery mobile-->
+        <link rel="stylesheet" href="css/jquery.mobile-1.2.0.css" />
+        <script src="js/jquery.js"></script>
+        <script src="js/jquery.mobile-1.2.0.js"></script>
+        <!--Freburist-->
+        <script src="js/freburistscript.js"></script>
+        <!-- cordova facebook plugin -->
+        <script src="js/cdv-plugin-fb-connect.js"></script>
+        <!-- facebook js sdk -->
+        <script src="js/facebook_js_sdk.js"></script>
+        <script src="js/facebook_script.js"></script>
+
+        <!--<script>
+            document.addEventListener('deviceready', function() {
+                try {
+                    //alert('Device is ready! Make sure you set your app_id below this alert.');
+                    FB.init({
+                        appId: "443025939073135", 
+                        nativeInterface: CDV.FB, 
+                        useCachedDialogs: false
+                    });
+                } catch (e) {
+                    alert(e);
+                }
+            }, false);
+        </script>-->
+    </head>
+    <body>
+        <div data-role="page" id="login" data-title="Login">
+            <div data-role="content">
+                <div id="fb-root"></div>
+                <div id="logo">
+                    <center><img src="images/freburist_logo128.png"></center>
+                </div>
+                <div id="name">Freburist</div>
+                <center><br><div><a href="#" id="btnLogin" onclick="login()"><img src="images/sign-in-buttons.png"></a></div></center>
+                <center><a href="nearme.html" data-ajax="false" data-role="button" data-theme="e" data-inline="true">Skip</a></center>
+            </div>
+        </div>
+        
+    </body>

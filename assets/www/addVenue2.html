@@ -1,0 +1,176 @@
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html>
+    <head>
+        <title></title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="css/mobile.css" type="text/css">
+        <!--Apache Cordova-->
+        <script type="text/javascript" charset="utf-8" src="js/cordova-2.3.0.js"></script>
+        <!--jquery mobile-->
+        <link rel="stylesheet" href="css/jquery.mobile-1.2.0.css" />
+        <script src="js/jquery.js"></script>
+        <script src="js/jquery.mobile-1.2.0.js"></script>
+        <!--GoogleMaps-->
+        <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=true&libraries=places"></script>
+
+        <!--Freburist-->
+
+        <script>
+            var map;
+            var geocoder;
+            var markerMap;
+            document.addEventListener("deviceready", onReady, false);
+            function onReady(){
+                navigator.geolocation.getCurrentPosition(curMap,onError);
+            }
+            function onError(error) {
+                alert('code: '    + error.code    + '\n' +
+                    'message: ' + error.message + '\n');
+            }
+            function curMap(position){
+                
+                var latlng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+                var mapOptions = {
+                    zoom: 14,
+                    center: latlng,
+                    mapTypeId: google.maps.MapTypeId.ROADMAP,
+                    draggable: false
+                };
+                map = new google.maps.Map(document.getElementById('curMap'), mapOptions);
+               
+                
+                addGeo(position);//Add value in inputtext<lat and lng>
+                addrLookup(position.coords.latitude,position.coords.longitude); //Request Geocode form Google Maps.
+            }
+            
+            function addrLookup(lat,lng){
+                var icon = 'images/icon/marker48.png';
+                var latlng = new google.maps.LatLng(parseFloat(lat),parseFloat(lng));
+                geocoder = new google.maps.Geocoder();
+                geocoder.geocode({'latLng': latlng}, function(results, status) {
+                    if (status == google.maps.GeocoderStatus.OK) {
+                        if (results[1]) {
+                            map.setZoom(14);
+                            markerMap = new google.maps.Marker({
+                                position: latlng,
+                                map: map,
+                                animation: google.maps.Animation.DROP,
+                                icon: icon
+                                
+                            });
+                            document.getElementById('addr').value = results[1].formatted_address;
+                        }
+                    } else {
+                        alert("Geocoder failed due to: " + status);
+                    }
+                });
+            }
+            function addGeo(position){
+                document.getElementById('lat').value = position.coords.latitude;
+                document.getElementById('lng').value = position.coords.longitude;
+            }
+            
+            function addVenueService(){
+                alert("Don't touch me!");
+                
+                //var url = 'http://raspberrybove.azurewebsites.net/Service/AddVenue.asmx?op=AddVenues'; 
+                $.ajax({ 
+                    type: "POST", 
+                    url: "http://raspberrybove.cloudapp.net/Service/AddVenue.asmx?op=HelloWorld", 
+                    
+                    data:"{}",
+                    contentType: "application/json; charset=utf-8", 
+                    dataType: "json", 
+                    success: OnSuccessCall,
+                    error: OnErrorCall
+                });
+                
+            }
+            function OnSuccessCall(response){
+                alert(response.d);
+            }
+            function OnErrorCall(response){
+                alert(response.status+","+response.statusText);
+            }
+            /*data: "{'venue_name': '" + $("#name").val() + "', 'address': '" + $("#addr").val()
+                        + "', 'lat': '" + $("#lat").val()+ "', 'lng': '" + $("#lng").val()
+                        + "', 'tel': '" + $("#tel").val() + "'}",*/
+        </script>
+
+    </head>
+    <body>
+        <div data-role="page" id="addVenue">
+
+            <div data-role="header" id="hdrMain">
+                <a href="#" data-icon="arrow-l" data-rel="back">Back</a>
+                <h1>Add venue <br>(behind the scene version)</h1>
+                <a href="camera.html" class="ui-btn-right" rel="external" data-ajax="false">
+                    <img src="images/icon/camera1.png" style="width: 48px; height: auto;">
+                </a>
+            </div>
+            <div data-role="content" id="contentMain" >
+                <form id="addVenueForm">
+                    <h4>ชื่อสถานที่</h4>
+                    <input type="text" id="name" name="name" data-theme="a">
+                    <h4>ที่อยู่</h4>
+                    <input id="addr" name="addr">
+                    <h4>เบอร์โทรศัพท์</h4>
+                    <input type="tel" id="tel" name="tel">
+
+                    <fieldset data-role="controlgroup" data-type="horizontal" style="text-align: center;">
+                        <legend>ประเภทสถานที่</legend>
+                        <input type="radio" name="cate1_r" id="radio-choice-1" value="shops" data-theme="e">
+                        <label for="radio-choice-1">ที่ช๊อป</label>
+
+                        <input type="radio" name="cate2_r" id="radio-choice-2" value="foods" data-theme="e">
+                        <label for="radio-choice-2">ที่กิน</label>
+
+                        <input type="radio" name="cate3_r" id="radio-choice-3" value="travel" data-theme="e">
+                        <label for="radio-choice-3">ที่เที่ยว</label>
+                    </fieldset>
+
+                    <div id="curMap"><img src="css/images/ajax-loader.gif"></div>
+                    <input id="submit" type="button" data-theme="a" value="Add a Venue" onclick="addVenueService()">
+
+                    <input id="lat" name="lat" disabled>
+                    <input id="lng" name="lng" disabled>
+                    <input type="text" id="subDistrict" name="subDistrict_r" disabled>
+                    <input type="text" id="district" name="district_r" disabled>
+                    <input type="text" id="province" name="province_r" disabled>
+                    <input type="text" id="postcode" name="postcode_r" disabled>
+                    <input type="text" id="country" name="country_r" disabled>
+                </form>
+            </div> <!--ContentMain-->
+
+            <div align="CENTER" data-role="content" id="contentDialog">	
+                <div>Please fill in all required fields before submitting the form.</div>
+                <a id="buttonOK" name="buttonOK" href="#addVenue" data-role="button" data-inline="true">OK</a>
+            </div>	<!-- contentDialog -->
+
+            <!-- contentTransition is displayed after the form is submitted until a response is received back. -->
+            <div data-role="content" id="contentTransition" >	
+                <div align="CENTER"><h4>Your info has been sent. Please wait.</h4></div>
+                <div align="CENTER"><img id="spin" name="spin" src="images/wait.gif"/></div>
+            </div>	<!-- contentTransition -->
+
+            <!-- Although stored within page1 div tag, hdrConfirmation, contentConfirmation and ftrConfirmation represent a self contained 'confirmation page' -->
+            <div data-role="header"  id="hdrConfirmation" data-nobackbtn="true">
+                <h1>Add Venue Complete</h1>
+            </div>
+
+            <div data-role="content" id="contentConfirmation" align="center">	
+                <p>A new venue has been created based on data you have submitted.</p> 
+                <p>Your confirmation number is: <span id="confirmation"></span>  </p>
+            </div><!-- contentConfirmation -->	
+
+            <div data-role="footer" id="ftrConfirmation" ></div> 
+
+
+        </div>
+    </body>
+</html>

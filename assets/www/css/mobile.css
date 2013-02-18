@@ -1,0 +1,220 @@
+/* 
+    Document   : mobile
+    Created on : Oct 7, 2012, 1:55:55 PM
+    Author     : tgorn
+    Description:
+        Purpose of the stylesheet follows.
+*/
+@font-face{
+    font-family: krub;
+    src: url(THKrub.ttf);
+}
+root { 
+    display: block;
+}
+body{
+    font-family: krub;
+    font-size: 14px;
+}
+#first_page{
+    background-color:#333333;
+}
+#mapholder{
+    width: 100%;
+    height: 200px;
+    border: 1px solid #999;
+}
+#curMap{
+    width: 100%;
+    height: 200px;
+    border: 1px solid #999;
+}
+#name{
+
+    font-family: 'krub', sans-serif;
+    font-size: 4em;
+    text-align: center;
+    color: white;
+}
+#btnLogin{
+    width: 70%;
+    padding: 0;
+    /* position:absolute ; top: 30% ; */
+}
+
+#btnSkip{
+    width: 100%;
+    /*position: absolute; top: 40%;*/
+}
+#placeimg{
+    width: 100%;
+    height: 30%;
+}
+#friendsFeed li{
+    width: 100%;
+    margin:5px;
+    padding: 5px;
+    float:left;
+    background:#f1f1f1;
+    border:3px solid #ddd;
+}
+#btnSkip{
+    padding: 10px;
+    text-align: center;
+}
+#rMark{
+    width: 120px;
+    height: auto;
+}
+#menu_home{
+    text-align: center;
+}
+#grid1{
+    background-image: url('../images/white_bg_pixel.png');
+    background-repeat:repeat;
+}
+#photo_profile{
+    background-position: center center;
+    width: 100%;
+    height: 100%;
+}
+.overlay{
+    width: 100%;
+    padding: 0;
+    background-color: #000;
+    opacity: 0.82;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 60px;
+}
+#header{
+    background-image: url("../images/logo_bar.png");
+}
+
+#logo{
+    padding-top: 20%;
+}
+
+#home{
+    background: #15acbd;
+}
+
+#food_venue{
+    height: 100%;
+    width: 100%;
+    border: 1px solid #333;
+    margin: 0 auto;
+    margin-top: 0.6em;
+}
+
+#nearme{
+    font-family: krub;
+    background-image: url("../images/nearme_bg.jpg");
+}
+.pageBG{
+    background-image: url("../images/nearme_bg.jpg");
+}
+
+#event #venue_pic{
+    width: auto;
+    height: 200px;
+    -moz-box-shadow: 0 0 5px 5px #888;
+    -webkit-box-shadow: 0 0 5px 5px#888;
+    box-shadow: 0 0 5px 5px #888;
+}
+
+#food #venue_pic{
+    width: auto;
+    height: 200px;
+    -moz-box-shadow: 0 0 5px 5px #888;
+    -webkit-box-shadow: 0 0 5px 5px#888;
+    box-shadow: 0 0 5px 5px #888;
+}
+
+#food_venue{
+    background-image: url("http://www.bloggang.com/data/y/yuanyuanrestaurant/picture/1289395063.jpg");
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    width: 100%;
+    height: 150px;
+    -moz-box-shadow: 0 0 5px 5px #888;
+    -webkit-box-shadow: 0 0 5px 5px#888;
+    box-shadow: 0 0 5px 5px #888;
+}
+
+#event_venue{
+    background-image: url("http://images.golunu69.multiply.com/image/16/photos/42/1200x1200/4/DSC-0756-4-5.jpg?et=oepBtvoRduewRyjCcXj8KA&nmid=280686601");
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    width: 100%;
+    height: 150px;
+    -moz-box-shadow: 0 0 5px 5px #888;
+    -webkit-box-shadow: 0 0 5px 5px#888;
+    box-shadow: 0 0 5px 5px #888;
+}
+
+#overlay{
+    opacity: 0.82;
+    height: 60px;
+    width: 100%;
+    background-color: #000;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+
+#venue_name h2{
+    color: #15acbd;
+    text-decoration: none;
+    margin-top: 0;
+    font-family: krub;
+}
+
+#venue_name h4{
+    color: #15acbd;
+    text-decoration: none;
+    margin-top: 0;
+    font-family: krub;
+}
+
+#venue_name a{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    font-family: krub;
+}
+
+@media screen and (min-height: 1024px){
+    #login{
+        background-color: #15acbd;
+        /*background-image: url("../images/bg.jpg");*/
+    }
+}
+
+@media screen and (max-height: 800px){
+    #login{
+        background-color: #15acbd;
+    }
+}
+
+@media screen and (min-width: 800px){
+    #login{
+        background-color: #15acbd;
+        /*background-image: url("../images/bg.jpg");*/
+    }
+}
+
+/* Portrait 
+@media screen and (orientation:portrait) {
+    body { opacity: 1; }
+}
+/* Landscape 
+@media screen and (orientation:landscape) {
+    
+}*/
+

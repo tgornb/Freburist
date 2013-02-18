@@ -1,0 +1,187 @@
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Freburist</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link href="/maps/documentation/javascript/examples/default.css" rel="stylesheet">
+        <link rel="stylesheet" href="css/mobile.css" type="text/css">
+        <!--Apache Cordova-->
+        <script type="text/javascript" charset="utf-8" src="js/cordova-2.3.0.js"></script>
+        <!--jquery mobile-->
+        <link rel="stylesheet" href="css/jquery.mobile-1.2.0.css" />
+        <script src="js/jquery.js"></script>
+        <script src="js/jquery.mobile-1.2.0.js"></script>
+        <!--Freburist-->
+        <script src="js/freburistscript.js"></script>
+        <!--Google Map-->
+        <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=true"></script>
+                <script>
+            var map;
+            document.addEventListener("deviceready", onReady, false);
+            function onReady(){
+                navigator.geolocation.getCurrentPosition(curMap,onError);
+            }
+            function onError(error) {
+                alert('code: '    + error.code    + '\n' +
+                    'message: ' + error.message + '\n');
+            }
+            function curMap(position){
+                var latlng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+                var mapOptions = {
+                    zoom: 14,
+                    center: latlng,
+                    draggable: false,
+                    mapTypeId: google.maps.MapTypeId.ROADMAP
+                };
+                map = new google.maps.Map(document.getElementById('curMap'), mapOptions);
+                //Show current location with customarker.
+                var icon = 'images/icon/marker48.png';
+                var curMap = new google.maps.Marker({
+                    position: latlng,
+                    map: map,
+                    draggable:true,
+                    animation: google.maps.Animation.DROP,
+                    icon: icon
+                });
+                
+            }
+            
+        </script>
+
+    </head>
+    <body>
+        <div data-role="page" id="nearme" data-title="Freburist">
+            <div data-role="header">
+                <h1><img src="images/freburist_logo.png"> NearMe</h1>
+                <a href="addVenue.html" rel="external" data-ajax="false" 
+                   data-role="button" data-theme="e" class="ui-btn-right" data-icon="plus">Add a Venue1</a>
+                <a href="addVenue2.html" rel="external" data-ajax="false" 
+                   data-role="button" data-theme="e" class="ui-btn-left" data-icon="plus">Add a Venue2</a>
+                <div data-role="navbar">
+                    <ul>
+                        <li><a href="#" class="ui-btn-active ui-state-persist">ที่ช็อปปิ้ง</a></li>
+                        <li><a href="#" class="ui-btn-active ui-state-persist">ที่กิน</a></li>
+                        <li><a href="#" class="ui-btn-active ui-state-persist">ที่เที่ยว</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div data-role="content">
+                <h3 style="margin:0px">I'm here</h3>
+                <div id="curMap"><img src="css/images/ajax-loader.gif"></div>
+                <div id="venue">
+                    <br><h2>คุณกำลังหิวอยู่ใช่มั้ย ?</h2>
+                    <div id="food_venue">
+                        <div id="overlay">
+                            <div id="venue_name">
+                                <a href="#food" id="checkin" data-role="button" data-theme="c" data-inline="true">ข้อมูลเพิ่มเติม</a>
+                                <h2>มนตรายาใจ</h2>
+                                <h4>ร้านอาหาร</h4>
+                            </div>
+                        </div>
+                    </div>
+                    <br><h2>คุณกำลังหากิจกรรมทำแก้เบื่ออยู่ใช่มั้ย ?</h2>
+                    <div id="event_venue">
+                        <div id="overlay">
+                            <div id="venue_name">
+                                <a href="#event" id="checkin" data-role="button" data-theme="c" data-inline="true">ข้อมูลเพิ่มเติม</a>
+                                <h2>สวนหลวง ร.9</h2>
+                                <h4>กิจกรรม</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+            <div data-role="navbar" data-iconpos="top" data-position="fixed">
+                <ul>
+                    <li>
+                        <a href="#" data-theme="a" data-icon="arrow-l" data-transition="slide" data-rel="back">
+                            Back
+                        </a>
+                    </li>
+                    <li>
+                        <a href="note.html" data-theme="a" data-icon="check" data-transition="slide">
+                            Note
+                        </a>
+                    </li>
+                    <li>
+                        <a href="home.html" data-theme="a" data-icon="grid" data-transition="slide">
+                            Menu
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div data-role="page" id="food" data-title="Freburist">
+            <div id="header">
+                <center><img src="images/freburist_logo.png"></center>
+            </div>
+            <div data-role="content">
+                <center><img id="venue_pic" src="http://www.bloggang.com/data/y/yuanyuanrestaurant/picture/1289395063.jpg"></center>
+                <div id="info_box">
+                    <h3>ชื่อสถานที่ : มนตรายาใจ</h3>
+                    <h5>ประเภทสถานที่ : ร้านอาหาร</h5>
+                </div> 
+                <br><a href="#" id="share_fb" data-role="button" data-theme="b" onclick="facebookWallPost()">Checkin</a>
+            </div>
+            <div data-role="navbar" data-iconpos="top" data-position="fixed">
+                <ul>
+                    <li>
+                        <a href="#" data-theme="a" data-icon="arrow-l" data-transition="slide" data-rel="back">
+                            Back
+                        </a>
+                    </li>
+                    <li>
+                        <a href="note.html" data-theme="a" data-icon="check" data-transition="slide">
+                            Note
+                        </a>
+                    </li>
+                    <li>
+                        <a href="home.html" data-theme="a" data-icon="grid" data-transition="slide">
+                            Menu
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div data-role="page" id="event" data-title="Freburist">
+            <div id="header">
+                <center><img src="images/freburist_logo.png"></center>
+            </div>
+            <div data-role="content">
+                <center><img id="venue_pic" src="http://images.golunu69.multiply.com/image/16/photos/42/1200x1200/4/DSC-0756-4-5.jpg?et=oepBtvoRduewRyjCcXj8KA&nmid=280686601"></center>
+                <div id="info_box">
+                    <h3>ชื่อสถานที่ : สวนหลวง ร.9</h3>
+                    <h5>ประเภทสถานที่ : กิจกรรม</h5>
+                </div> 
+                <br><a href="#" id="share_fb" data-role="button" data-theme="b" onclick="facebookWallPost()">Checkin</a>
+            </div>
+            <div data-role="navbar" data-iconpos="top" data-position="fixed">
+                <ul>
+                    <li>
+                        <a href="#" data-theme="a" data-icon="arrow-l" data-transition="slide" data-rel="back">
+                            Back
+                        </a>
+                    </li>
+                    <li>
+                        <a href="note.html" data-theme="a" data-icon="check" data-transition="slide">
+                            Note
+                        </a>
+                    </li>
+                    <li>
+                        <a href="home.html" data-theme="a" data-icon="grid" data-transition="slide">
+                            Menu
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+    </body>
+</html>

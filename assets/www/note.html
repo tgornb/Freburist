@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+    
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>
+        </title>
+        <link rel="stylesheet" href="css/jquery.mobile-1.2.0.css" />
+        <style>
+            /* App custom styles */
+        </style>
+        <script src="js/jquery.js"></script>
+        <script src="js/jquery.mobile-1.2.0.js"></script>
+        <script src="js/freburistscript.js"></script>
+    </head>
+    
+    <body>
+        <!-- Note -->
+        <div data-role="page" id="page6">
+            <div data-theme="a" data-role="header">
+                <a data-role="button" data-direction="reverse" data-rel="back" href="#page6"
+                data-icon="arrow-l" data-iconpos="left" class="ui-btn-left">
+                    Back
+                </a>
+                <h3>
+                    Note
+                </h3>
+                <a data-role="button" data-theme="b" href="#page6" data-icon="plus" data-iconpos="left"
+                class="ui-btn-right">
+                    Save
+                </a>
+            </div>
+            <div data-role="content" style="padding: 0px">
+                <img src="https://maps.googleapis.com/maps/api/staticmap?center=ladkrabang&amp;zoom=14&amp;size=320x100&amp;markers=ladkrabang&amp;sensor=false"
+                width="360" height="100">
+                <a data-role="button" data-inline="true" data-theme="e" href="#page6"
+                data-icon="check" data-iconpos="left">
+                    Attach my location
+                </a>
+                <div data-role="fieldcontain">
+                    <fieldset data-role="controlgroup">
+                        <label for="textarea1">
+                            Note it
+                        </label>
+                        <textarea name="" id="textarea1" placeholder="">Type here</textarea>
+                    </fieldset>
+                </div>
+            </div>
+        </div>
+        <script>
+              //App custom javascript
+        </script>
+    </body>
+
+</html>

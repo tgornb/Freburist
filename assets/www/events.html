@@ -1,0 +1,73 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>Freburist</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="css/mobile.css" type="text/css">
+        <!-- Google Web fonts-->
+        
+        <!--Apache Cordova-->
+        <script type="text/javascript" charset="utf-8" src="cordova-2.1.0.js"></script>
+        <!--jquery mobile-->
+        <link rel="stylesheet" href="css/jquery.mobile-1.2.0.css" />
+        <script src="js/jquery.js"></script>
+        <script src="js/jquery.mobile-1.2.0.js"></script>
+        <!--Google Map-->
+        <script src="https://maps.googleapis.com/maps/api/js?sensor=true&libraries=places"></script>
+        <!--Freburist-->
+        <script src="js/freburistscript.js"></script>
+        <!-- cordova facebook plugin -->
+        <script src="cdv-plugin-fb-connect.js"></script>
+        <!-- facebook js sdk -->
+        <script src="facebook_js_sdk.js"></script>
+
+    </head>
+    <body>
+
+        <!--Page: Events-->
+        <div data-role="page" id="events" data-title="Freburist">
+            <div data-role="header">
+                <a href="#" data-icon="arrow-l" data-rel="back">Back</a>
+                <h1>Events</h1>
+            </div>
+            <div data-role="content">
+                <ul data-role="listview" data-split-icon="grid">
+                    <li data-role="list-divider">Subscribe list</li>
+                    <li><a href="#">Central</a><a href="#subscribe" data-rel="popup" data-position-to="window" data-transition="pop">Subscribe</a></li>
+                    <li><a href="#">Siam Paragon</a><a href="#subscribe" data-rel="popup" data-position-to="window" data-transition="pop">Subscribe</a></li>
+                    <li><a href="#">สภากาชาดไทย</a><a href="#subscribe" data-rel="popup" data-position-to="window" data-transition="pop">Subscribe</a></li>
+                </ul>
+                <br><br>
+                <ul data-role="listview" data-split-icon="grid" data-split-theme="a">
+                    <li data-role="list-divider">All Events</li>
+                    <li data-icon="info"><a href="#subscribe">วิ่งเฉลิมพระเกียรติ</a></li>
+                    <li data-icon="info"><a href="#">บริจาคโลหิต</a></li>
+                    <li data-icon="info"><a href="#">กินปลาทู ดูทะเล</a></li>
+                </ul>
+                <div data-role="popup" id="subscribe" data-theme="d" data-overlay-theme="b">
+                        <h3>Subscribe</h3>
+                        <p>ติดตามอีเว้นต์ดีๆ สินค้าลดราคา และอื่นๆจากแบรนด์ชั้นนำแบบไม่ให้คลาดสายตา !!!</p>
+                        <a href="events.html" data-role="button" data-theme="b" data-icon="check" data-inline="true" data-mini="true">Subscribe</a>
+                </div>
+            </div>
+        </div>
+        <!--Page: Check-in-->
+        <div data-role="page" id="checkin" data-title="Freburist">
+            <div data-role="header">
+                <h1>Check in</h1>
+            </div>
+            <div data-role="content">
+                <form action="" method="POST">
+                    <div data-role="fieldcontain">
+                        <fieldset data-role="controlgroup">
+                            คุณกำลังทำอะไรอยู่ บอกเพื่อนไปเลย !!
+                            <textarea name="tips" id="tips" placeholder="กินมื้อกลางวันสุดอร่อย"></textarea>
+                        </fieldset>
+                    </div>
+                    <input id="submit" type="submit" data-theme="a" value="Submit">
+                </form>
+            </div>
+        </div>
+    </body>
+</html>

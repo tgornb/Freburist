@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pluins>
+    <plugin name="Device" value="org.apache.cordova.Device" />
+    <plugin name="Geolocation" value="org.apache.cordova.GeoBroker" />
+    <plugin name="org.apache.cordova.facebook.Connect" value="org.apache.cordova.facebook.ConnectPlugin" />
+    <plugin name="Camera" value="org.apache.cordova.CameraLauncher" />
+</pluins>
